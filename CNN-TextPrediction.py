@@ -42,8 +42,53 @@ for i, sentence in enumerate(sentences):
 
 def build_model(maxlen, chars):
     # build the model: an MLP with 1 hidden layer
+    
     print('Build model...')
     model = Sequential()
+    model.add(Flatten(input_shape=(maxlen, len(chars))))
+    model.add(Dense(128))
+    model.add(Dense(len(chars)))
+    model.add(Activation('softmax'))
+    
+
+    
+    model.add(Conv1D(
+        10,
+        20,
+        input_shape = (60, 57),
+        activation = 'softmax',
+        ))
+
+    model.add(MaxPooling1D(
+            pool_size = 1,
+            stride = 1
+        ))
+
+    model.add(Conv1D(
+        10,
+        20,
+        input_shape = (60, 57),
+        activation = 'softmax',
+        ))
+
+    model.add(MaxPooling1D(
+            pool_size = 1,
+            stride = 1
+        ))
+
+    model.add(Conv1D(
+        10,
+        20,
+        input_shape=(60, 57),
+        activation='softmax',
+    ))
+
+    model.add(MaxPooling1D(
+        pool_size=1,
+        stride=1
+    ))
+
+
     model.add(Flatten(input_shape=(maxlen, len(chars))))
     model.add(Dense(128))
     model.add(Dense(len(chars)))
